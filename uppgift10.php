@@ -9,11 +9,12 @@
 <body>
     <!-- <p>Mät in antal inmatade pengar <br><input></p> -->
     <?php
-    $in = "5123.64";
+    $in = "550";
     $mod = $in % 100;
     $ut = $in - $mod;
     /* $ut = (int)$ut; */
     $antal = $ut / 100;
+    $antal = (int)$antal;
     echo "<p>Uttagsautomat - Hundralappar</p> <p>Inmatat: $in, uttag: $ut ($antal hundralappar)</p>";
     ?>
 </body>
