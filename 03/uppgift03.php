@@ -14,9 +14,11 @@
     if ($tal1 > $tal2) {
         echo "$printout $tal1";
     }
+    elseif ($tal1 < $tal2) {
+        echo "$printout $tal2";
+    }
     else {
-        echo $printout .$tal2;
-        
+        echo "Båda tal är lika stora";
     }
     ?>
 </body>
