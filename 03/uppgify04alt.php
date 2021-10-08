@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php
-    # Lösning utan switch?
     $dag = 1;
     $lista = array(1=>"Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag");
     switch ($dag) {
