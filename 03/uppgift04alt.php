@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- Behöver fixas, fungerar ej med variabel mindre än 1 eller större än 7 -->
     <?php
     $dag = 1;
     $lista = array(1=>"Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag");
@@ -15,9 +16,9 @@
             $result = $lista[$dag];
             break;
         default:
-            $result = "error";
+            $result = "Värden finns inte";
             break;
-    }
+            }
     echo $result
     ?>
 </body>

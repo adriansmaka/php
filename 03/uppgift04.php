@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    $dag = 2;
+    $dag = 9;
     switch ($dag) {
         case "1":
             $result = "Måndag";
@@ -32,7 +32,7 @@
             $result = "Söndag";
             break;
         default:
-            echo "Värden finns inte";
+            $result = "Värden finns inte";
             break;
     }
     echo $result
