@@ -8,10 +8,11 @@
 </head>
 <body>
     <?php
-        $i = 10;
+        $i = 0;
         do {
-            echo $i++ ."<br>";
-        } while ($i < 21);
+            echo $i ."<br>";
+            $i+=10;
+        } while ($i < 100 + 10);
     ?>
 </body>
 </html>
