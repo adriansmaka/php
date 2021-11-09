@@ -15,12 +15,10 @@
         $name = $_GET["name"];
         $surname = $_GET["surname"];
         if (empty($name) or empty($surname)) {
-            header('location: uppgift02.html');
+            header('location: uppgift02.php');
         } else {
             echo "Hello $name $surname";
         }
-    } else {
-        header('location: uppgift02.html');
     }
     ?>
 </body>
