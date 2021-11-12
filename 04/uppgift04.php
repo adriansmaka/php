@@ -19,7 +19,7 @@
         }
 
         .result {
-            font-size: 1px;
+            font-size: 20px;
         }
 
         .form__input {
@@ -54,7 +54,7 @@
                 <input type="number" name="n2" id="n2"  step="1" min="0" max="10">
             </div>
 
-            <button type="submit">Sum 'em up</button>
+            <button type="submit">Compare</button>
         </form>
 
         <?php
