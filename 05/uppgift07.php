@@ -58,7 +58,7 @@
     if ($_GET) {
         $text = trim($_GET["text"]);
     $explist = explode(" ", $text);
-    foreach ($explist as $key => $value) {
+    foreach ($explist as $value) {
         $r = mt_rand(1, 3);
         if ($r == 1) {
                 echo "<sub>". $value. "</sub>";
