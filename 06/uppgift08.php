@@ -1,5 +1,7 @@
 <?php
-    $numbers = array(1, 2, 3);
+    $numbers = array(4, 1, 2, -3, 4);
+
+    #print_r($numbers);
 
     function minimum($numbers)
     {
@@ -9,9 +11,9 @@
         foreach ($numbers as $value) {
             if ($value < $minvalue) {
                 $minvalue = $value;
-                echo $minvalue;
-            }
+            } 
         }
+        echo $minvalue;
     }
-    minimum($numbers)
+    minimum($numbers);
 ?>
