@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-        <form action="skolmatidag.php" method="get">
+        <form action="output.php" method="get">
             <div class="form__input">
 
                 <h1>Skolmaten</h1>
@@ -68,17 +68,3 @@
         </form>
 </body>
 </html>
-
-<?php
-    if ($_GET) {
-        $mat = $_GET["mat"];
-        $betyg = $_GET["betyg"];
-        if (empty($mat) and empty($betyg)) {
-            header("location: skolmatidag.php");
-        } else {
-            echo "Omdömen har skickats";
-        }
-    }
-?>
-
-<!-- Mat idag, betyg 1-5 -->
