@@ -9,9 +9,6 @@
         body {
             display: grid;
             place-items: center;
-            /* justify-content: center;
-            align-items: center;
-            flex-direction: column; */
             background-color: YellowGreen;
 
             margin: 0;
@@ -49,7 +46,7 @@
             <label for="namn">Maten:</label>
             <input type="text" name="namn" id="namn" required>
             <label for="betyg">Betyg:</label>
-            <input type="text" name="betyg" id="betyg" required>
+            <input type="text" name="betyg" id="betyg" min="1" max="5" required>
         </div>
         <button type="submit">Skicka</button>
     </form>
@@ -70,19 +67,32 @@
 
     //Checks if file exists.
     if (file_exists($file)) {
-        echo "The file exists.";
+        //echo "The file exists.<br>";
         //Writes on file.
         if (file_put_contents($file, $ftext, FILE_APPEND)) {
-            echo "Data successfully written. <br>";
+            echo "Datan sparades korrekt. <br>";
+        } else {
+            echo "Kunde inte skriva datan i filen. <br>";
+        }
+        //Prints file.
+        if ($f = file($file)) {
+
+            foreach ($f as $v) {
+                $x  = explode('|', $v);
+                //print_r($x);
+                //echo "Du matade in måltiden <p>$x[0] med betyget $x[1]</p>";
+            }
+        }
+    } else {
+        //echo "Filen fanns inte och har nu skapats.<br>";
+        fopen($file, "w+");
+        if (file_put_contents($file, $ftext, FILE_APPEND)) {
+            echo "Datan sparades korrekt. <br>";
         } else {
             echo "Error. <br>";
         }
         //Prints file.
         if ($f = file($file)) {
-            echo "<p>The content of the file is the following:</p>";
-            //echo "<pre>";
-            //print_r($f);
-            //echo "</pre>";
 
             foreach ($f as $v) {
                 $x  = explode('|', $v);
@@ -90,11 +100,13 @@
                 echo "<p>$x[0] har betyget $x[1]</p>";
             }
         }
-    } /*else {
-        echo "Filen finns inte";
-        fopen($file, "w+");
-    }*/
+    }
 }
+
+/* if (file_exists($file)) { 
+    print_r($file);
+} */
+
 //Date print.
 $today = getdate();
 foreach ($today as $key => $value) {

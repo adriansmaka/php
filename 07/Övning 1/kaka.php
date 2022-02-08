@@ -5,26 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* <!---Write styles here---> */
+        body {
+            display: grid;
+            /* justify-items: center; */
+            grid-template-rows: auto 1fr;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px 100px;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+
+        form {
+            /* background-color: #b0b; */
+            display: grid;
+            align-items: end;
+            justify-content: center;
+        }
+        p {
+            display: grid;
+            justify-content: center;
+            margin: 4px 0px 0px 4px;
+            /* background-color: red; */
+        }
+
+        button {
+            /* align-self: end; */
+            margin-bottom: 0px;
+        }
+    </style>
 </head>
 <body>
-    <form action="kaka.php" method="get">
-        <button type="submit" name="btn">Radera datan</button>
-    </form>
-
     <?php
-    
-    if(isset($_GET['btn'])) {
-        $file = "data.txt";
-        if(file_exists($file)) {
-            if (!unlink($file)) {
-                echo "<p>File \"$file\" could not be deleted.</p>";
-            } else {
-                echo "<p>File \"$file\" deleted succesfully.</p>";
-            }
-        } else {
-            echo "<p>Filen finns inte än</p>";
+    $file = "data.txt";
+    if(file_exists($file)) {
+        if ($f = file($file)) {
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>Måltid</th>";
+            echo "<th>Betyg</th>";
+            echo "<th>Datum</th>";
+            echo "</tr>";
+            foreach ($f as $v) {
+                $x  = explode('|', $v);
+
+                echo "<tr>";
+                echo "<td>$x[0]</td>";
+                echo "<td>$x[1]</td>";
+                echo "<td>placeholder</td>";
+                echo "</tr>";
+            } 
         }
+    } else {
+        echo "<p>Det finns ingen data än</p>";
     }
+    echo "</table>";
 
     /*
         //Prints file.
@@ -42,5 +87,23 @@
         }
         */
     ?>
-</body>
+    <form action="kaka.php" method="post">
+        <button type="submit" name="btn">Radera datan</button>
+    </form>
+    <?php
+        if($_POST) {
+            $btn = $_POST['btn'];
+            if(file_exists($file)) {
+                if(isset($btn)) {
+                    (unlink($file));
+                    echo "<p>File \"$file\" deleted succesfully.</p>";
+                    //header("location: kaka.php");
+                }
+            } else {
+                    echo "<p>File \"$file\" could not be found.</p>";
+                }
+        }
+?>
+    </body>
 </html>
+
