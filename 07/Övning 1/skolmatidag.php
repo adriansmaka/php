@@ -97,7 +97,7 @@
             foreach ($f as $v) {
                 $x  = explode('|', $v);
                 //print_r($x);
-                echo "<p>$x[0] har betyget $x[1]</p>";
+                //echo "<p>$x[0] har betyget $x[1]</p>";
             }
         }
     }

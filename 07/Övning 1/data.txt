@@ -1,3 +1,2 @@
 kaka|1
-banan|2
-gurka|3
+kaka|2

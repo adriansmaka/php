@@ -100,7 +100,7 @@
                     //header("location: kaka.php");
                 }
             } else {
-                    echo "<p>File \"$file\" could not be found.</p>";
+                    echo "<p>File \"$file\" could not be deleted.</p>";
                 }
         }
 ?>
