@@ -83,11 +83,11 @@
                 $x  = explode('|', $v);
                 //print_r($x);
                 echo "<p>$x[0] har betyget $x[1]</p>";
-            }
+            }   
         }
         */
     ?>
-    <form action="kaka.php" method="post">
+    <form action="skolmaten.php" method="post">
         <button type="submit" name="btn">Radera datan</button>
     </form>
     <?php
@@ -97,7 +97,7 @@
                 if(isset($btn)) {
                     (unlink($file));
                     echo "<p>File \"$file\" deleted succesfully.</p>";
-                    //header("location: kaka.php");
+                    //header("location: skolmaten.php");
                 }
             } else {
                     echo "<p>File \"$file\" could not be deleted.</p>";

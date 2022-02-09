@@ -110,18 +110,82 @@
 //Date print.
 $today = getdate();
 foreach ($today as $key => $value) {
-    if ($key == "mday" or $key == "month" or $key == "year") {
-        if ($value <= 31 and (is_numeric($value) == True)) {
-            $mday = $value;
-        } if ($value > 31 and (is_numeric($value) == True)) {
-            $year = $value;
-        } if (is_string($value) == True) { //Fixa det här, hämta månad från tal till sträng!
-            $mon = $value;
+    if ($key == "wday") { 
+        switch ($value) {
+            case 0:
+                $value = "Söndag";
+                break;
+            case 1:
+                $value = "Måndag";
+                break;
+            case 2:
+                $value = "Tisdag";
+                break;
+            case 3:
+                $value = "Onsdag";
+                break;
+            case 4:
+                $value = "Torsdag";
+                break;
+            case 5:
+                $value = "Fredag";
+                break;
+            case 6:
+                $value = "Lördag";
+                break;
         }
+        echo "$value";
+    }
+    if ($key == "mday") { 
+        echo $value;
+    }
+    if ($key == "mon") { 
+        switch ($value) {
+            case 1:
+                $value = "Januari";
+                break;
+            case 2:
+                $value = "Februari";
+                break;
+            case 3:
+                $value = "Mars";
+                break;
+            case 4:
+                $value = "April";
+                break;
+            case 5:
+                $value = "Maj";
+                break;
+            case 6:
+                $value = "Juni";
+                break;
+            case 7:
+                $value = "Juli";
+                break;
+            case 8:
+                $value = "Augusti";
+                break;
+            case 9:
+                $value = "September";
+                break;
+            case 10:
+                $value = "Oktober";
+                break;
+            case 11:
+                $value = "November";
+                break;
+            case 12:
+                $value = "December";
+                break;
+        }
+        echo $value;
+    }
+    if ($key == "year") {
+        echo $value;
     }
 }
 
-echo "<p>$mday $mon $year</p>";
+//echo "<p>$mday $mon $year</p>";
 
 $m_numtostr = array(
     1 => "Januari",
