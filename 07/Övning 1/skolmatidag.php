@@ -46,23 +46,108 @@
             <label for="namn">Maten:</label>
             <input type="text" name="namn" id="namn" required>
             <label for="betyg">Betyg:</label>
-            <input type="text" name="betyg" id="betyg" min="1" max="5" required>
+            <input type="number" name="betyg" id="betyg" min="1" max="5" required>
         </div>
         <button type="submit">Skicka</button>
     </form>
-<?php
+    <?php
 
-    //setlocale(LC_TIME, "sv_SE");
-    $file = "data.txt";
+//setlocale(LC_TIME, "sv_SE");
+$file = "data.txt";
 
-    if ($_POST) {
-        $namn = $_POST["namn"];
-        $betyg = $_POST["betyg"];
-        if (empty($namn) or empty($betyg)) {
-            header('location: skolmatidag.php');
+if ($_POST) {
+    $namn = $_POST["namn"];
+    $betyg = $_POST["betyg"];
+    
+    if (empty($namn) or empty($betyg)) {
+        header('location: skolmatidag.php');
+    }
+    
+    //Date print start.
+    $today = getdate();
+    foreach ($today as $key => $value) {
+        if ($key == "wday") { 
+            switch ($value) {
+                case 0:
+                    $value = "Söndag";
+                    break;
+                case 1:
+                    $value = "Måndag";
+                    break;
+                case 2:
+                    $value = "Tisdag";
+                    break;
+                case 3:
+                    $value = "Onsdag";
+                    break;
+                case 4:
+                    $value = "Torsdag";
+                    break;
+                case 5:
+                    $value = "Fredag";
+                    break;
+                case 6:
+                    $value = "Lördag";
+                    break;
+            }
+            $wday = $value;
+            //echo $wday;
         }
+        if ($key == "mday") { 
+            $mday = $value;
+            //echo $mday; 
+        }
+        if ($key == "mon") { 
+            switch ($value) {
+                case 1:
+                    $value = "Januari";
+                    break;
+                case 2:
+                    $value = "Februari";
+                    break;
+                case 3:
+                    $value = "Mars";
+                    break;
+                case 4:
+                    $value = "April";
+                    break;
+                case 5:
+                    $value = "Maj";
+                    break;
+                case 6:
+                    $value = "Juni";
+                    break;
+                case 7:
+                    $value = "Juli";
+                    break;
+                case 8:
+                    $value = "Augusti";
+                    break;
+                case 9:
+                    $value = "September";
+                    break;
+                case 10:
+                    $value = "Oktober";
+                    break;
+                case 11:
+                    $value = "November";
+                    break;
+                case 12:
+                    $value = "December";
+                    break;
+            }
+            $mon = $value;
+            //echo $mon;
+        }
+        if ($key == "year") {
+            $year = $value;
+            //echo $year;
+        }
+    }
+    //echo "<p>$wday $mday $mon $year</p>";
+    //Date print end.
 
-    $text = "$namn|$betyg\n";
+    $text = "$namn|$betyg|$mday $mon $year\n";
     $ftext = filter_var($text, FILTER_SANITIZE_STRING);
 
     //Checks if file exists.
@@ -80,7 +165,8 @@
             foreach ($f as $v) {
                 $x  = explode('|', $v);
                 //print_r($x);
-                //echo "Du matade in måltiden <p>$x[0] med betyget $x[1]</p>";
+                //echo "<br>";
+                echo "<p>$x[0] med betyget $x[1] och datum $x[2]</p>";
             }
         }
     } else {
@@ -91,6 +177,7 @@
         } else {
             echo "Error. <br>";
         }
+/*
         //Prints file.
         if ($f = file($file)) {
 
@@ -100,6 +187,7 @@
                 //echo "<p>$x[0] har betyget $x[1]</p>";
             }
         }
+        */
     }
 }
 
@@ -107,86 +195,8 @@
     print_r($file);
 } */
 
-//Date print.
-$today = getdate();
-foreach ($today as $key => $value) {
-    if ($key == "wday") { 
-        switch ($value) {
-            case 0:
-                $value = "Söndag";
-                break;
-            case 1:
-                $value = "Måndag";
-                break;
-            case 2:
-                $value = "Tisdag";
-                break;
-            case 3:
-                $value = "Onsdag";
-                break;
-            case 4:
-                $value = "Torsdag";
-                break;
-            case 5:
-                $value = "Fredag";
-                break;
-            case 6:
-                $value = "Lördag";
-                break;
-        }
-        echo "$value";
-    }
-    if ($key == "mday") { 
-        echo $value;
-    }
-    if ($key == "mon") { 
-        switch ($value) {
-            case 1:
-                $value = "Januari";
-                break;
-            case 2:
-                $value = "Februari";
-                break;
-            case 3:
-                $value = "Mars";
-                break;
-            case 4:
-                $value = "April";
-                break;
-            case 5:
-                $value = "Maj";
-                break;
-            case 6:
-                $value = "Juni";
-                break;
-            case 7:
-                $value = "Juli";
-                break;
-            case 8:
-                $value = "Augusti";
-                break;
-            case 9:
-                $value = "September";
-                break;
-            case 10:
-                $value = "Oktober";
-                break;
-            case 11:
-                $value = "November";
-                break;
-            case 12:
-                $value = "December";
-                break;
-        }
-        echo $value;
-    }
-    if ($key == "year") {
-        echo $value;
-    }
-}
 
-//echo "<p>$mday $mon $year</p>";
-
+/*
 $m_numtostr = array(
     1 => "Januari",
     "Februari",
@@ -201,7 +211,7 @@ $m_numtostr = array(
     "November",
     "December"
     )
-    
+*/
 ?>
 </body>
 </html>

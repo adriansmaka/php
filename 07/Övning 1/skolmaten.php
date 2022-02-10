@@ -62,7 +62,7 @@
                 echo "<tr>";
                 echo "<td>$x[0]</td>";
                 echo "<td>$x[1]</td>";
-                echo "<td>placeholder</td>";
+                echo "<td>$x[2]</td>";
                 echo "</tr>";
             } 
         }
