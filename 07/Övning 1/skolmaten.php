@@ -71,21 +71,6 @@
     }
     echo "</table>";
 
-    /*
-        //Prints file.
-        if ($f = file($file)) {
-            echo "<p>The content of the file is the following:</p>";
-            //echo "<pre>";
-            //print_r($f);
-            //echo "</pre>";
-    
-            foreach ($f as $v) {
-                $x  = explode('|', $v);
-                //print_r($x);
-                echo "<p>$x[0] har betyget $x[1]</p>";
-            }   
-        }
-        */
     ?>
     <form action="skolmaten.php" method="post">
         <button type="submit" name="btn">Radera datan</button>
@@ -97,7 +82,6 @@
                 if(isset($btn)) {
                     (unlink($file));
                     echo "<p>File \"$file\" deleted succesfully.</p>";
-                    //header("location: skolmaten.php");
                 }
             } else {
                     echo "<p>File \"$file\" could not be deleted.</p>";
