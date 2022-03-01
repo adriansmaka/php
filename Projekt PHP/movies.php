@@ -11,16 +11,33 @@
             display: grid;
             place-items: center;
         }
-
+        
         .nav {
             display: flex;
             justify-content: space-evenly;
             border-style: solid;
             padding: 6px;
         }
-
+        
+        .tables {
+            display: grid;
+            place-items: center;
+            text-align: center;
+        }
+        
         a {
             padding: 0px 4px 0px 4px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            min-width: 60%;
+            margin: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #000;
+            padding: 5px;
         }
 
     </style>
@@ -34,7 +51,6 @@
 
     <?php
     include_once 'functions.php';
-
 
     if ($_GET) {
         $type = $_GET['type'];
@@ -50,6 +66,9 @@
     }
 
     if ($_POST) {
+        $titel = $_POST["titel"];
+        $kat = $_POST["kat"];
+        $bet = $_POST["bet"];
         addMovie($titel, $kat, $bet);
     }
 
