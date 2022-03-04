@@ -50,7 +50,7 @@
         <a href="movies.php?type=show&kat=action">Action</a>
         <a href="movies.php?type=add">Lägg till</a>
     </div>
-
+    
     <?php
     include_once 'functions.php';
 

@@ -195,15 +195,15 @@ if ($kat == "hem") {
                     echo "<td>$x[0]</td>";
                     echo "<td>$x[2]</td>";
                     echo "</tr>";
+                    }
                 }
-            }
+            } else {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns inga filmer med kategori $kat.</p>";
+            echo "</table>";
+            echo "</div>";
         }
-    } else {
-        echo "<div class=\"tables\">";
-        echo "<p>Det finns inga filmer med kategori $kat.</p>";
-        echo "</table>";
-        echo "</div>";
-    }
+        }   
     } else {
         echo "Filen $mvin kunde inte hittas.";
     }
