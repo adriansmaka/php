@@ -47,6 +47,16 @@ function listMovies($kat)
 $mvin = "movieinfo.txt";
 
 if ($kat == "hem") {
+    echo "<div class=\"mid\">";
+    echo "<h1>Välkommen till webbsidan</h1>";
+    echo "<ul>";
+    echo "<li><p>På sidan \"Ny\" visas den nyaste filmen.</p></li>";
+    echo "<li><p>På sidan \"Alla\" visas alla filmer, dess titel, kategori och betyg.</p></li>";
+    echo "<li><p>På sidan \"Kategorier\" visas endast filmer av vald kategori.</p></li>";
+    echo "<li><p>På sidan \"Lägg till\" kan man lägga till nya filmer.</p></li>";
+    echo "</ul>";
+    echo "</div>";
+} elseif ($kat == "ny") {
     //Visa alla filmer
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
@@ -234,11 +244,11 @@ function addMovie($titel, $kat, $bet)
 
         if (file_put_contents($mvin, $txt, FILE_APPEND)) {
             echo "<div class=\"mid\">";
-            echo "Filmen har lagts till.<br>";
+            echo "<p>Filmen har lagts till.</p><br>";
             echo "</div>";
         } else {
             echo "<div class=\"mid\">";
-            echo "Filmen kunde ej läggas till.<br>";
+            echo "<p>Filmen kunde ej läggas till.<p><br>";
             echo "</div>";
         }
         
