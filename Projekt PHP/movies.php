@@ -44,9 +44,11 @@
 </head>
 <body>
     <div class="nav">
-        <a href="movies.php?type=add">Lägg till</a>
+        <a href="movies.php?type=show&kat=hem">Hem</a>
+        <a href="movies.php?type=show&kat=alla">Alla</a>
         <a href="movies.php?type=show&kat=komedi">Komedi</a>
         <a href="movies.php?type=show&kat=action">Action</a>
+        <a href="movies.php?type=add">Lägg till</a>
     </div>
 
     <?php

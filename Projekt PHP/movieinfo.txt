@@ -1,1 +1,7 @@
-KOMEDIFILM|komedi|1
+action|action|1
+action|action|1
+komedi|komedi|5
+q.,fmqNFKLq|action|1
+kaka|action|1
+kakaaaa|action|1
+asdajwfäoq|komedi|1

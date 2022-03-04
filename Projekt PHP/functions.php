@@ -1,18 +1,10 @@
 <?php
-function allMovies()
-{
-    echo "Call to allMovies function.<br>";
-}
-
-
-
-
 
 function showForm()
 {
     echo "<div class=\"mid\">";
     
-    echo "<h1>Lägg till ny film</h1>";
+    echo "<h1>Lägg till ny film:</h1>";
     echo "<form action=\"movies.php\" method=\"post\">";
     
     echo "<p>";
@@ -42,56 +34,191 @@ function showForm()
 } 
 
 
-
+function array_search_partial($arr, $keyword) {
+    foreach($arr as $index => $string) {
+        if (strpos($string, $keyword) !== FALSE)
+            return $index;
+    }
+}
 
 
 function listMovies($kat)
 {
-    $mvin = "movieinfo.txt";
+$mvin = "movieinfo.txt";
 
-    if ($kat == "komedi") {
-        //Visa filmer i komedi
-        if (file_exists($mvin)) {
-            if ($f = file($mvin)) {
+if ($kat == "hem") {
+    //Visa alla filmer
+    if (file_exists($mvin)) {
+        if (filesize($mvin) == 0) {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns ingen film i databasen.</p>";
+        } elseif ($f = file($mvin)) {
+            $lastkey = array_key_last($f);
+            $lastval = ($f[$lastkey]);
+            $x  = explode('|', $lastval);
+            $upper_kat = custom_mb_ucfirst($x[1]);
+
+                    echo "<div class=\"tables\">";
+                    echo "<h1>Senast inlagt film:</h1>";
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Titel</th>";
+                    echo "<th>Kategori</th>";
+                    echo "<th>Betyg</th>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>$x[0]</td>";
+                    echo "<td>$upper_kat</td>";
+                    echo "<td>$x[2]</td>";
+                    echo "</tr>";
+                    echo "</table>";
+                    echo "</div>";
+                }
+        } else {
+            echo "Filen $mvin kunde inte hittas.";
+        }
+        
+
+} elseif ($kat == "alla") {
+    //Visa alla filmer
+    if (file_exists($mvin)) {
+        if (filesize($mvin) == 0) {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns ingen film i databasen.</p>";
+        } elseif ($f = file($mvin)) {
+            echo "<div class=\"tables\">";
+            echo "<h1>Alla filmer i databasen:</h1>";
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>Titel</th>";
+            echo "<th>Kategori</th>";
+            echo "<th>Betyg</th>";
+            echo "</tr>";
+
+            foreach ($f as $val) {
+                $x  = explode('|', $val);
+                $upper_kat = custom_mb_ucfirst($x[1]);
+                    
+                    echo "<tr>";
+                    echo "<td>$x[0]</td>";
+                    echo "<td>$upper_kat</td>";
+                    echo "<td>$x[2]</td>";
+                    echo "</tr>";
+                }
+                echo "</div>";
+                echo "</table>";
+                }
+        } else {
+            echo "Filen $mvin kunde inte hittas.";
+        }
+
+
+} elseif ($kat == "komedi") {
+    //Visa filmer i komedi
+    if (file_exists($mvin)) {
+        if (filesize($mvin) == 0) {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns ingen film i databasen.</p>";
+        } elseif ($f = file($mvin)) {
+            /*
+            echo "<pre>";
+            print_r($f);
+            echo "</pre>";
+            */
+
+            if (is_int(array_search_partial($f, $kat))) {
+                echo "<div class=\"tables\">";
+                echo "<h1>Alla filmer i $kat:</h1>";
+                echo "<table>";
+                echo "<tr>";
+                echo "<th>Titel</th>";
+                echo "<th>Betyg</th>";
+                echo "</tr>";
                 foreach ($f as $val) {
                     $x  = explode('|', $val);
+                    if ($x[1] == "komedi") {
                     //echo "<pre>";
                     //print_r($x);
-                    //echo "</pre>";
-                    if ($x[1] == "komedi") {
-                        /*
-                        echo "<pre>";
-                        print_r($x);
-                        echo "</pre>";
-                        */
-                        
-                        echo "<div class=\"tables\">";
-                        echo "<table>";
-                        echo "<tr>";
-                        echo "<th>Titel</th>";
-                        echo "<th>Betyg</th>";
-                        echo "</tr>";
-                        echo "<tr>";
-                        echo "<td>$x[0]</td>";
-                        echo "<td>$x[2]</td>";
-                        echo "</tr>";
-                        echo "</table>";
-                        echo "</div>";
-                        
+                //echo "</pre>";
+                    /*
+                    echo "<pre>";
+                    print_r($x);
+                    echo "</pre>";
+                    */
+                    
+                    echo "<tr>";
+                    echo "<td>$x[0]</td>";
+                    echo "<td>$x[2]</td>";
+                    echo "</tr>";
                     }
                 }
+            } else {
+                //echo "not found";
+                echo "<div class=\"tables\">";
+                echo "<p>Det finns inga filmer med kategori $kat.</p>";
             }
-        } else {
-            echo "Filen $mvin finns inte.";
         }
-    } elseif ($kat == "action") {
-        //Visa filmer i action
+        echo "</table>";
+        echo "</div>";
+        } else {
+            echo "Filen $mvin kunde inte hittas.";
+            }
+
+
+
+
+} elseif ($kat == "action") {
+    //Visa filmer i action
+    if (file_exists($mvin)) {
+        if (filesize($mvin) == 0) {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns ingen film i databasen.</p>";
+        } elseif ($f = file($mvin)) {
+            if (is_int(array_search_partial($f, $kat))) {
+            echo "<div class=\"tables\">";
+            echo "<h1>Alla filmer i action:</h1>";
+            echo "<table>";
+            echo "<tr>";
+            echo "<th>Titel</th>";
+            echo "<th>Betyg</th>";
+            echo "</tr>";
+            foreach ($f as $val) {
+                $x  = explode('|', $val);
+                if ($x[1] == "action") {
+
+                    /*
+                    echo "<pre>";
+                    print_r($x);
+                    echo "</pre>";
+                    */
+                    echo "<tr>";
+                    echo "<td>$x[0]</td>";
+                    echo "<td>$x[2]</td>";
+                    echo "</tr>";
+                }
+            }
+        }
+    } else {
+        echo "<div class=\"tables\">";
+        echo "<p>Det finns inga filmer med kategori $kat.</p>";
+        echo "</table>";
+        echo "</div>";
     }
-    //echo "visa alla filmer i $kat";
+    } else {
+        echo "Filen $mvin kunde inte hittas.";
+    }
 }
 
+} //Slut av funktionen listMovies.
 
 
+function custom_mb_ucfirst($string)
+    {
+        $first = mb_strtoupper(mb_substr($string, 0, 1));
+        $rest = mb_strtolower(mb_substr($string, 1));
+        $fullstring = $first.$rest;
+        return $fullstring;
+    }
 
 
 function addMovie($titel, $kat, $bet)
@@ -106,18 +233,22 @@ function addMovie($titel, $kat, $bet)
         $txt = $titel_filter .'|' .$kat_filter .'|' .$bet_filter ."\n";
 
         if (file_put_contents($mvin, $txt, FILE_APPEND)) {
-            echo "det fungerade att skriva till filen<br>";
+            echo "<div class=\"mid\">";
+            echo "Filmen har lagts till.<br>";
+            echo "</div>";
         } else {
-            echo "det fungerade inte att skriva till filen<br>";
+            echo "<div class=\"mid\">";
+            echo "Filmen kunde ej läggas till.<br>";
+            echo "</div>";
         }
         
         if ($f = file($mvin)) {
             foreach($f as $val) {
                 $x  = explode('|', $val);
-                print_r($x);
+                //print_r($x);
                 //echo "<p>$x[0] $x[1] $x[2]<br></p>";
                 if ($value = "action") {
-                    echo "film med kat action hittat<br>";
+                    //echo "film med kat action hittat<br>";
                 }
             }
         }
