@@ -60,7 +60,7 @@
         
         /* "Kategorier" knapp */
         .dropbtn {
-            padding: 2px 6px;
+            padding: 2px 2px;
             border: 0.01em solid transparent;
             cursor: pointer;
             color: black;
