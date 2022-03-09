@@ -1,6 +1,7 @@
 <?php
 
 function showForm()
+/* Lägg till film formuläret */
 {
     echo "<div class=\"mid\">";
     
@@ -31,20 +32,15 @@ function showForm()
     echo "</form>";
     
     echo "</div>";
-} 
+} //Slut på funktionen showForm.
 
-
-function array_search_partial($arr, $keyword) {
-    foreach($arr as $index => $string) {
-        if (strpos($string, $keyword) !== FALSE)
-            return $index;
-    }
-}
 
 
 function listMovies($kat)
+/* Visar filmer beroende på kategori */
 {
 $mvin = "movieinfo.txt";
+$notfound = "Filen $mvin kunde inte hittas.";
 
 if ($kat == "hem") {
     echo "<div class=\"mid\">";
@@ -56,8 +52,9 @@ if ($kat == "hem") {
     echo "<li><p>På sidan \"Lägg till\" kan man lägga till nya filmer.</p></li>";
     echo "</ul>";
     echo "</div>";
+
+//Visa den nyaste filmen
 } elseif ($kat == "ny") {
-    //Visa alla filmer
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
             echo "<div class=\"tables\">";
@@ -85,12 +82,12 @@ if ($kat == "hem") {
                     echo "</div>";
                 }
         } else {
-            echo "Filen $mvin kunde inte hittas.";
+            echo $notfound;
         }
         
-
+        
+//Visar alla filmer
 } elseif ($kat == "alla") {
-    //Visa alla filmer
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
             echo "<div class=\"tables\">";
@@ -119,23 +116,17 @@ if ($kat == "hem") {
                 echo "</table>";
                 }
         } else {
-            echo "Filen $mvin kunde inte hittas.";
+            echo $notfound;
         }
 
 
+//Visa filmer i komedi
 } elseif ($kat == "komedi") {
-    //Visa filmer i komedi
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
             echo "<div class=\"tables\">";
             echo "<p>Det finns ingen film i databasen.</p>";
         } elseif ($f = file($mvin)) {
-            /*
-            echo "<pre>";
-            print_r($f);
-            echo "</pre>";
-            */
-
             if (is_int(array_search_partial($f, $kat))) {
                 echo "<div class=\"tables\">";
                 echo "<h1>Alla filmer i $kat:</h1>";
@@ -147,15 +138,6 @@ if ($kat == "hem") {
                 foreach ($f as $val) {
                     $x  = explode('|', $val);
                     if ($x[1] == "komedi") {
-                    //echo "<pre>";
-                    //print_r($x);
-                //echo "</pre>";
-                    /*
-                    echo "<pre>";
-                    print_r($x);
-                    echo "</pre>";
-                    */
-                    
                     echo "<tr>";
                     echo "<td>$x[0]</td>";
                     echo "<td>$x[2]</td>";
@@ -163,7 +145,6 @@ if ($kat == "hem") {
                     }
                 }
             } else {
-                //echo "not found";
                 echo "<div class=\"tables\">";
                 echo "<p>Det finns inga filmer med kategori $kat.</p>";
             }
@@ -171,14 +152,11 @@ if ($kat == "hem") {
         echo "</table>";
         echo "</div>";
         } else {
-            echo "Filen $mvin kunde inte hittas.";
+            echo $notfound;
             }
 
-
-
-
+//Visa filmer i action
 } elseif ($kat == "action") {
-    //Visa filmer i action
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
             echo "<div class=\"tables\">";
@@ -195,12 +173,6 @@ if ($kat == "hem") {
             foreach ($f as $val) {
                 $x  = explode('|', $val);
                 if ($x[1] == "action") {
-
-                    /*
-                    echo "<pre>";
-                    print_r($x);
-                    echo "</pre>";
-                    */
                     echo "<tr>";
                     echo "<td>$x[0]</td>";
                     echo "<td>$x[2]</td>";
@@ -212,26 +184,18 @@ if ($kat == "hem") {
             echo "<p>Det finns inga filmer med kategori $kat.</p>";
             echo "</table>";
             echo "</div>";
-        }
+            }
         }   
     } else {
-        echo "Filen $mvin kunde inte hittas.";
+        echo $notfound;
     }
-}
-
-} //Slut av funktionen listMovies.
-
-
-function custom_mb_ucfirst($string)
-    {
-        $first = mb_strtoupper(mb_substr($string, 0, 1));
-        $rest = mb_strtolower(mb_substr($string, 1));
-        $fullstring = $first.$rest;
-        return $fullstring;
     }
+} //Slut på funktionen listMovies.
+
 
 
 function addMovie($titel, $kat, $bet)
+//Lägger till filmet till databasen
 {
     $mvin = "movieinfo.txt";
 
@@ -267,36 +231,44 @@ function addMovie($titel, $kat, $bet)
         $titel_filter = filter_var($titel, FILTER_SANITIZE_STRING);
         $kat_filter = filter_var($kat, FILTER_SANITIZE_STRING);
         $bet_filter = filter_var($bet, FILTER_SANITIZE_STRING);
-
         $txt = $titel_filter .'|' .$kat_filter .'|' .$bet_filter ."\n";
 
         if (file_put_contents($mvin, $txt, FILE_APPEND)) {
-            echo "det fungerade att skriva till filen<br>";
+            //echo "det fungerade att skriva till filen<br>";
         } else {
-            echo "det fungerade inte att skriva till filen<br>";
+            //echo "det fungerade inte att skriva till filen<br>";
         }
         
         if ($f = file($mvin)) {
             foreach($f as $val) {
                 $x  = explode('|', $val);
                 print_r($x);
-                //echo "<p>$x[0] $x[1] $x[2]<br></p>";
                 if ($value = "action") {
-                    echo "film med kat action hittat<br>";
+                    //echo "film med kat action hittat<br>";
                 }
             }
         }
     }
-    //echo "skriven titel $titel, kategori $kat, betyg $bet<br>";
+
+} //Slut på funktionen addMovie.
+
+
+
+/* Övriga funktioner */
+
+function custom_mb_ucfirst($string)
+//Multibytes version av ucfirst.
+    {
+        $first = mb_strtoupper(mb_substr($string, 0, 1));
+        $rest = mb_strtolower(mb_substr($string, 1));
+        $fullstring = $first.$rest;
+        return $fullstring;
+    }
+
+function array_search_partial($arr, $keyword) {
+/* Söker ett värde i en array, skriver ut nyckeln. */
+    foreach($arr as $index => $string) {
+        if (strpos($string, $keyword) !== FALSE)
+            return $index;
+    }
 }
-
-/*
-
-//echo "<label for=\"kategori\">Kategori: </label>";
-echo "<input type=\"checkbox\" id=\"komedi\" name=\"komedi\">";
-echo "<label for=\"komedi\"> Komedi</label><br>";
-echo "<input type=\"checkbox\" id=\"action\" name=\"action\">";
-echo "<label for=\"action\"> Action</label><br>";
-//echo "<label for=\"kategori\"> Action</label><br>";
-
-*/

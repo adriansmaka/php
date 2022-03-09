@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>Benkes filmbibliotek</title>
     <style>
-
+        /* Bakgrundsfärg */
         body {
             background-color: YellowGreen;
         }
 
+        /* Klass för att centrera objekt */
         .mid {
             display: grid;
             place-items: center;
             align-content: center;
         }
         
+        /* Klass för att navbaren */
         .nav {
             display: flex;
             justify-content: space-evenly;
@@ -26,6 +28,7 @@
             background-color: lightgreen;
         }
         
+        /* Klass för tabeller */
         .tables {
             display: grid;
             place-items: center;
@@ -53,8 +56,11 @@
             font-size: 14px;
         }
 
+        /* Klasser för dropwdownen på kategorier*/
+        
+        /* "Kategorier" knapp */
         .dropbtn {
-            padding: 2px 8px;
+            padding: 2px 6px;
             border: 0.01em solid transparent;
             cursor: pointer;
             color: black;
@@ -62,13 +68,13 @@
             background-color: lightgreen;
             }
 
-            /* The container <div> - needed to position the dropdown content */
+        /* Dropdown-låda */
         .dropdown {
             position: relative;
             display: inline-block;
             }
 
-            /* Dropdown Content (Hidden by Default) */
+        /* Innehåll i dropdown-lådan */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -79,23 +85,34 @@
             background-color: lightgreen;
             }
 
-            /* Links inside the dropdown */
+            
         .dropdown-content a {
             color: black;
             padding: 4px 4px;
             text-decoration: none;
             display: block;
+            border-style: dashed;
+            border-width: 0.12em 0.12em 0em 0.12em;
+            margin: 0px 0px;
             }
 
-            /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #829eb5;}
+            .dropdown-content a:nth-last-child(1) {
+                border-bottom: 0.12em dashed;
+            }
 
-            /* Show the dropdown menu on hover */
+            .dropdown-content a:nth-child(1) {
+                margin-top: 1px;
+            }
+
+            
+        .dropdown-content a:hover {
+            background-color: #829eb5;
+        }
+
         .dropdown:hover .dropdown-content {
             display: block;
             }
 
-            /* Change the background color of the dropdown button when the dropdown content is shown */
         .dropdown:hover .dropbtn {
             border: 0.01em solid;
             }
@@ -124,11 +141,9 @@
 
     if ($_GET) {
         $type = $_GET['type'];
-
         if ($type == "add") {
             showForm();
         }
-
         if ($type == "show") {
             $kat = $_GET['kat'];
             listMovies($kat);
