@@ -141,9 +141,11 @@
 
     if ($_GET) {
         $type = $_GET['type'];
+        /* Kör funktionen för att visa formuläret */
         if ($type == "add") {
             showForm();
         }
+        /* Kör funktionen för att visa filmer */
         if ($type == "show") {
             $kat = $_GET['kat'];
             listMovies($kat);
@@ -154,9 +156,9 @@
         $titel = $_POST["titel"];
         $kat = $_POST["kat"];
         $bet = $_POST["bet"];
+        /* Lägger till film funktionen */
         addMovie($titel, $kat, $bet);
     }
-
     ?>
 </body>
 </html>
