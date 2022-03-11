@@ -121,7 +121,6 @@
 </head>
 <body>
     <div class="nav">
-        <a href="movies.php?type=show&kat=hem">Hem</a>
         <a href="movies.php?type=show&kat=ny">Ny</a>
         <a href="movies.php?type=show&kat=alla">Alla</a>
 
@@ -144,13 +143,18 @@
         /* Kör funktionen för att visa formuläret */
         if ($type == "add") {
             showForm();
-        }
-        /* Kör funktionen för att visa filmer */
-        if ($type == "show") {
+        } elseif ($type == "show") {
+            /* Kör funktionen för att visa filmer */
             $kat = $_GET['kat'];
             listMovies($kat);
+            if ($kat == "ny") {
+                /* Funktion för nyaste filmen */
+                showNew();
+            }
+        } else {
+            showNew();
         }
-    }
+    } 
 
     if ($_POST) {
         $titel = $_POST["titel"];

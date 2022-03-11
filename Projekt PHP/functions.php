@@ -3,6 +3,9 @@
 function showForm()
 /* Lägg till film formuläret */
 {
+    $mvin = "movieinfo.txt";
+    $notfound = "Filen $mvin kunde inte hittas.";
+
     echo "<div class=\"mid\">";
     
     echo "<h1>Lägg till ny film:</h1>";
@@ -39,55 +42,11 @@ function showForm()
 function listMovies($kat)
 /* Visar filmer beroende på kategori */
 {
-$mvin = "movieinfo.txt";
-$notfound = "Filen $mvin kunde inte hittas.";
+    $mvin = "movieinfo.txt";
+    $notfound = "Filen $mvin kunde inte hittas.";
 
-if ($kat == "hem") {
-    echo "<div class=\"mid\">";
-    echo "<h1>Välkommen till webbsidan</h1>";
-    echo "<ul>";
-    echo "<li><p>På sidan \"Ny\" visas den nyaste filmen.</p></li>";
-    echo "<li><p>På sidan \"Alla\" visas alla filmer, dess titel, kategori och betyg.</p></li>";
-    echo "<li><p>På sidan \"Kategorier\" visas endast filmer av vald kategori.</p></li>";
-    echo "<li><p>På sidan \"Lägg till\" kan man lägga till nya filmer.</p></li>";
-    echo "</ul>";
-    echo "</div>";
-
-//Visa den nyaste filmen
-} elseif ($kat == "ny") {
-    if (file_exists($mvin)) {
-        if (filesize($mvin) == 0) {
-            echo "<div class=\"tables\">";
-            echo "<p>Det finns ingen film i databasen.</p>";
-        } elseif ($f = file($mvin)) {
-            $lastkey = array_key_last($f);
-            $lastval = ($f[$lastkey]);
-            $x  = explode('|', $lastval);
-            $upper_kat = custom_mb_ucfirst($x[1]);
-
-                    echo "<div class=\"tables\">";
-                    echo "<h1>Senast inlagt film:</h1>";
-                    echo "<table>";
-                    echo "<tr>";
-                    echo "<th>Titel</th>";
-                    echo "<th>Kategori</th>";
-                    echo "<th>Betyg</th>";
-                    echo "</tr>";
-                    echo "<tr>";
-                    echo "<td>$x[0]</td>";
-                    echo "<td>$upper_kat</td>";
-                    echo "<td>$x[2]</td>";
-                    echo "</tr>";
-                    echo "</table>";
-                    echo "</div>";
-                }
-        } else {
-            echo $notfound;
-        }
-        
-        
 //Visar alla filmer
-} elseif ($kat == "alla") {
+if ($kat == "alla") {
     if (file_exists($mvin)) {
         if (filesize($mvin) == 0) {
             echo "<div class=\"tables\">";
@@ -198,6 +157,7 @@ function addMovie($titel, $kat, $bet)
 //Lägger till filmet till databasen
 {
     $mvin = "movieinfo.txt";
+    $notfound = "Filen $mvin kunde inte hittas.";
 
     if (file_exists($mvin)) {
         $titel_filter = filter_var($titel, FILTER_SANITIZE_STRING);
@@ -252,6 +212,42 @@ function addMovie($titel, $kat, $bet)
 
 } //Slut på funktionen addMovie.
 
+
+function showNew()
+{
+    $mvin = "movieinfo.txt";
+    $notfound = "Filen $mvin kunde inte hittas.";
+
+    if (file_exists($mvin)) {
+        if (filesize($mvin) == 0) {
+            echo "<div class=\"tables\">";
+            echo "<p>Det finns ingen film i databasen.</p>";
+        } elseif ($f = file($mvin)) {
+            $lastkey = array_key_last($f);
+            $lastval = ($f[$lastkey]);
+            $x  = explode('|', $lastval);
+            $upper_kat = custom_mb_ucfirst($x[1]);
+
+                    echo "<div class=\"tables\">";
+                    echo "<h1>Senast inlagt film:</h1>";
+                    echo "<table>";
+                    echo "<tr>";
+                    echo "<th>Titel</th>";
+                    echo "<th>Kategori</th>";
+                    echo "<th>Betyg</th>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>$x[0]</td>";
+                    echo "<td>$upper_kat</td>";
+                    echo "<td>$x[2]</td>";
+                    echo "</tr>";
+                    echo "</table>";
+                    echo "</div>";
+                }
+        } else {
+            echo $notfound;
+        }
+} //Slut på showNew funktionen.
 
 
 /* Övriga funktioner */
